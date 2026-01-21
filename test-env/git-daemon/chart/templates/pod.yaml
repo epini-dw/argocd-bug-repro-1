@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: git-daemon
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: git-daemon
+spec:
+  containers:
+    - name: git-daemon
+      imagePullPolicy: IfNotPresent
+      image: {{ .Values.image }}
+      command:
+        - "git"
+        - "daemon"
+        - "--verbose"
+        - "--reuseaddr"
+        - "--port=9418"
+        - "--enable=receive-pack"
+        - "--base-path=/mnt/repo"
+        - "--export-all"
+        - "/mnt/repo"
+      ports:
+        - name: git
+          protocol: TCP
+          containerPort: 9418
+      volumeMounts:
+        - name: git-repo
+          mountPath: /mnt/repo
+      securityContext:
+        # Prevent Docker from setting ownership to root.
+        runAsUser: {{ .Values.uid }}
+        runAsGroup: {{ .Values.gid }}
+  volumes:
+    - name: git-repo
+      hostPath:
+        path: /mnt/host/repo
+        type: Directory

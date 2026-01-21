@@ -1,0 +1,8 @@
+.DS_Store
+._*
+
+/.env.local
+
+# Setup
+/kubeconfig.yaml
+/argo-cd/kustomization.yaml

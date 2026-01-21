@@ -1,0 +1,7 @@
+apiVersion: v2
+name: git-daemon
+description: In-cluster hosted git server with access to the host's cloned repo.
+
+type: application
+version: 0.1.0
+appVersion: "0.0.0"
