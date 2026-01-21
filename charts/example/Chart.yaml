@@ -1,0 +1,7 @@
+apiVersion: v2
+name: child-app
+description: A chart that generates a simple ConfigMap.
+
+type: application
+version: 0.1.0
+appVersion: "0.0.0"

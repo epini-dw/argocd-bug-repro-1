@@ -3,7 +3,7 @@
 Repository to demonstrate how to reproduce issue #~~~~ of Argo CD.
 
  - scenario-1 — Manual apply
- - scenario-2 — ApplicationSet
+ - [scenario-2](./scenario-2/) — ApplicationSet
  - scenario-3 — App of Apps Pattern
 
 ## Setup

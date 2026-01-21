@@ -1,0 +1,5 @@
+# This will generate an App named "method-2-bar" under the "argocd" namespace.
+# The App will create a ConfigMap of the same name under the "test" namespace.
+configmap:
+  data:
+    message: I won't be hydrated when `.disabled` is removed.

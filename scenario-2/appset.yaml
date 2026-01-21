@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: scenario-2-appset
+  namespace: argocd
+
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+
+  generators:
+    - git:
+        repoURL: git://git-daemon/
+        revision: main
+        files:
+          - path: scenario-2/apps/*.yaml
+
+  template:
+    metadata:
+      name: 'scenario-2-{{ .path.filenameNormalized | trimSuffix ".yaml" }}'
+    spec:
+      project: scenario-2
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: test
+      sourceHydrator:
+        drySource:
+          path: charts/example
+          repoURL: git://git-daemon/
+          targetRevision: main
+          helm:
+            releaseName: '{{ .path.filenameNormalized | trimSuffix ".yaml" }}'
+            valuesObject:
+              namespace: test
+              configmap:
+                name: 'scenario-2-{{ .path.filenameNormalized | trimSuffix ".yaml" }}'
+            valueFiles:
+              - '/{{ .path.path }}/{{ .path.filename }}'
+        syncSource:
+          path: 'manifests/scenario-2/{{ .path.filenameNormalized | trimSuffix ".yaml" }}'
+          targetBranch: hydrated
+      syncPolicy:
+        automated:
+          enabled: true

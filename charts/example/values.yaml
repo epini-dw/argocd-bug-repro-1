@@ -1,0 +1,4 @@
+namespace: ""
+configmap:
+  name: #required
+  data: {}
