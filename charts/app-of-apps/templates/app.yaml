@@ -1,0 +1,29 @@
+{{ range .Values.apps }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}
+  namespace: argocd
+
+spec:
+  project: {{ $.Values.project }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  sourceHydrator:
+    drySource:
+      path: charts/example
+      repoURL: git://git-daemon/
+      targetRevision: main
+      helm:
+        releaseName: {{ .name }}
+        valuesObject:
+          {{- .values | toYaml | nindent 10 }}
+    syncSource:
+      path: '{{ $.Values.generatedManifestsDir }}/{{ .name }}'
+      targetBranch: hydrated
+  syncPolicy:
+    automated:
+      enabled: true
+{{- end }}

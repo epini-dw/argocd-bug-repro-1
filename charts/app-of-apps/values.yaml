@@ -1,0 +1,10 @@
+generatedManifestsDir: "" # manifests/scenario-3
+
+apps: []
+#  - name: example-app
+#    values:
+#      namespace: test
+#      configmap:
+#        name: example-app-configmap
+#        data:
+#          message: Hello world!
