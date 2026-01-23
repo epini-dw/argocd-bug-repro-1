@@ -1,0 +1,31 @@
+# This App will create a ConfigMap of the same name under the "test" namespace.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: scenario-1-bar
+  namespace: argocd
+
+spec:
+  project: scenario-1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  sourceHydrator:
+    drySource:
+      path: charts/example
+      repoURL: git://git-daemon/
+      targetRevision: main
+      helm:
+        releaseName: 'bar'
+        valuesObject:
+          namespace: test
+          configmap:
+            name: 'scenario-1-bar'
+            data:
+              message: I won't be hydrated until a new commit is made.
+    syncSource:
+      path: 'manifests/scenario-1/bar'
+      targetBranch: hydrated
+  syncPolicy:
+    automated:
+      enabled: true
