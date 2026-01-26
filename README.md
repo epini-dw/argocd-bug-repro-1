@@ -1,6 +1,6 @@
-# Argo CD Issue #~~~~ Demonstration
+# Argo CD Issue #26154 Demonstration
 
-Repository to demonstrate how to reproduce issue #~~~~ of Argo CD.
+Repository to demonstrate how to reproduce issue [#26154](https://github.com/argoproj/argo-cd/issues/26154) of Argo CD.
 
  - [scenario-1](./scenario-1/) — Manual apply
  - [scenario-2](./scenario-2/) — ApplicationSet
