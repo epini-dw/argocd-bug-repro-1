@@ -1,9 +1,9 @@
 apps:
 
- - name: scenario-3-foo
+ - name: scenario-3-one
    values:
      namespace: test
      configmap:
-        name: scenario-3-foo
+        name: scenario-3-one
         data:
          message: I won't be hydrated.

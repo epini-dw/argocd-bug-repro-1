@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: scenario-1-foo
+  name: scenario-1-one
   namespace: argocd
 
 spec:
@@ -16,15 +16,15 @@ spec:
       repoURL: git://git-daemon/
       targetRevision: main
       helm:
-        releaseName: 'foo'
+        releaseName: 'one'
         valuesObject:
           namespace: test
           configmap:
-            name: 'scenario-1-foo'
+            name: 'scenario-1-one'
             data:
               message: Hello world!
     syncSource:
-      path: 'manifests/scenario-1/foo'
+      path: 'manifests/scenario-1/one'
       targetBranch: hydrated
   syncPolicy:
     automated:

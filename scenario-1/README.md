@@ -17,28 +17,28 @@ DRY commit, the Application won't be properly hydrated.
 
 ## Reproduction
 
- 1. Apply the Application from `app-foo.yaml`
- 2. Wait for the Application `scenario-1-foo` under the `argocd` namespace to sync.
- 3. Apply the Application from `app-bar.yaml`
+ 1. Apply the Application from `app-one.yaml`
+ 2. Wait for the Application `scenario-1-one` under the `argocd` namespace to sync.
+ 3. Apply the Application from `app-two.yaml`
 
 ## Expected Result
 
- - The manifests for `scenario-1-bar` will be hydrated, creating a new commit
+ - The manifests for `scenario-1-two` will be hydrated, creating a new commit
    on the `hydrated` branch with the rendered manifests under
-   `manifests/scenario-1/bar/`.
+   `manifests/scenario-1/two/`.
 
- - The `scenario-1-bar` app is synced, creating a `scenario-1-bar` ConfigMap
+ - The `scenario-1-two` app is synced, creating a `scenario-1-two` ConfigMap
    in the `test` namespace.
 
 ## Actual Result
 
- - No new commit is created on the `hydrated` branch, but the `scenario-1-bar`
+ - No new commit is created on the `hydrated` branch, but the `scenario-1-two`
    app's Source Hydrator status in the web UI shows that it was successfully
    hydrated.
 
- - The `scenario-1-bar` app fails to sync because the manifests don't exist
+ - The `scenario-1-two` app fails to sync because the manifests don't exist
    on the `hydrated` (syncSource) branch.
 
- - Requesting a Hard Refresh of `scenario-1-bar` updates the timestamp of the
+ - Requesting a Hard Refresh of `scenario-1-two` updates the timestamp of the
    Source Hydrator status to say "hydrated a few seconds ago", but does not
    hydrate the missing manifests.

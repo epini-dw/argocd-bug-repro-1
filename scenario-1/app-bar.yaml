@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: scenario-1-bar
+  name: scenario-1-two
   namespace: argocd
 
 spec:
@@ -16,15 +16,15 @@ spec:
       repoURL: git://git-daemon/
       targetRevision: main
       helm:
-        releaseName: 'bar'
+        releaseName: 'two'
         valuesObject:
           namespace: test
           configmap:
-            name: 'scenario-1-bar'
+            name: 'scenario-1-two'
             data:
               message: I won't be hydrated until a new commit is made.
     syncSource:
-      path: 'manifests/scenario-1/bar'
+      path: 'manifests/scenario-1/two'
       targetBranch: hydrated
   syncPolicy:
     automated:
