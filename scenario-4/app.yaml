@@ -1,0 +1,31 @@
+# This App will create a ConfigMap of the same name under the "test" namespace.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: scenario-4-app
+  namespace: argocd
+
+spec:
+  project: scenario-4
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  sourceHydrator:
+    drySource:
+      path: charts/example
+      repoURL: git://git-daemon/
+      targetRevision: main
+      helm:
+        releaseName: 'one'
+        valuesObject:
+          namespace: test
+          configmap:
+            name: 'scenario-4'
+            data:
+              message: Hello world!
+    syncSource:
+      path: 'manifests/scenario-4/app'
+      targetBranch: hydrated
+  syncPolicy:
+    automated:
+      enabled: true

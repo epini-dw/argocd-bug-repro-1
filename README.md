@@ -5,6 +5,7 @@ Repository to demonstrate how to reproduce issue [#26154](https://github.com/arg
  - [scenario-1](./scenario-1/) — Manual apply
  - [scenario-2](./scenario-2/) — ApplicationSet
  - [scenario-3](./scenario-3/) — App of Apps Pattern
+ - [scenario-4](./scenario-4/) — App Parameters (new as of 2026-03-13)
 
 ## Setup
 
