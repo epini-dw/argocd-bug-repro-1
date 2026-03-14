@@ -8,7 +8,7 @@ MY_UID=$(id -u)
 MY_GID=$(id -g)
 GIT_DAEMON_IMAGE=nobody/git-daemon:latest
 
-: "${ARGO_VERSION:=v3.3.0-rc3}"
+: "${ARGO_VERSION:=v3.3.3}"
 : "${ARGO_NAMESPACE:=argocd}"
 : "${ARGO_IMAGE:=}"
 : "${TEST_NAMESPACE=test}"
